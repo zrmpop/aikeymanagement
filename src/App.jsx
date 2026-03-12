@@ -24,6 +24,7 @@ const AI_SERVICES = [
     name: 'OpenAI',
     icon: '🤖',
     keyManagementUrl: 'https://platform.openai.com/api-keys',
+    baseUrl: 'https://api.openai.com/v1',
     color: 'from-green-500 to-emerald-600',
     description: 'GPT-4、GPT-3.5等模型'
   },
@@ -32,6 +33,7 @@ const AI_SERVICES = [
     name: 'Anthropic',
     icon: '🧠',
     keyManagementUrl: 'https://console.anthropic.com/settings/keys',
+    baseUrl: 'https://api.anthropic.com/v1',
     color: 'from-orange-500 to-red-600',
     description: 'Claude系列模型'
   },
@@ -40,6 +42,7 @@ const AI_SERVICES = [
     name: 'Google AI',
     icon: '🔍',
     keyManagementUrl: 'https://makersuite.google.com/app/apikey',
+    baseUrl: 'https://generativelanguage.googleapis.com/v1beta',
     color: 'from-blue-500 to-cyan-600',
     description: 'Gemini、PaLM等模型'
   },
@@ -48,6 +51,7 @@ const AI_SERVICES = [
     name: 'Azure OpenAI',
     icon: '☁️',
     keyManagementUrl: 'https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/~/OpenAI',
+    baseUrl: 'https://your-resource.openai.azure.com',
     color: 'from-blue-600 to-indigo-600',
     description: 'Azure托管的OpenAI服务'
   },
@@ -56,6 +60,7 @@ const AI_SERVICES = [
     name: 'Cohere',
     icon: '💬',
     keyManagementUrl: 'https://dashboard.cohere.ai/api-keys',
+    baseUrl: 'https://api.cohere.ai/v1',
     color: 'from-purple-500 to-pink-600',
     description: '文本生成和理解模型'
   },
@@ -64,6 +69,7 @@ const AI_SERVICES = [
     name: 'Hugging Face',
     icon: '🤗',
     keyManagementUrl: 'https://huggingface.co/settings/tokens',
+    baseUrl: 'https://api-inference.huggingface.co',
     color: 'from-yellow-500 to-orange-600',
     description: '开源模型和API'
   },
@@ -72,6 +78,7 @@ const AI_SERVICES = [
     name: 'Replicate',
     icon: '🎨',
     keyManagementUrl: 'https://replicate.com/account/api-tokens',
+    baseUrl: 'https://api.replicate.com/v1',
     color: 'from-pink-500 to-rose-600',
     description: '运行开源机器学习模型'
   },
@@ -80,6 +87,7 @@ const AI_SERVICES = [
     name: 'Stability AI',
     icon: '🖼️',
     keyManagementUrl: 'https://platform.stability.ai/account/keys',
+    baseUrl: 'https://api.stability.ai/v1',
     color: 'from-violet-500 to-purple-600',
     description: 'Stable Diffusion等图像模型'
   },
@@ -88,6 +96,7 @@ const AI_SERVICES = [
     name: 'Midjourney',
     icon: '🎭',
     keyManagementUrl: 'https://www.midjourney.com/account',
+    baseUrl: 'https://api.mjourney.com',
     color: 'from-indigo-500 to-blue-600',
     description: 'AI图像生成'
   },
@@ -96,6 +105,7 @@ const AI_SERVICES = [
     name: '百度千帆',
     icon: '🐼',
     keyManagementUrl: 'https://console.bce.baidu.com/qianfan/ais/console/applicationConsole/application',
+    baseUrl: 'https://aip.baidubce.com/rpc/2.0/ai_custom/v1',
     color: 'from-blue-400 to-blue-600',
     description: '文心一言等中文模型'
   },
@@ -104,6 +114,7 @@ const AI_SERVICES = [
     name: '阿里云通义',
     icon: '🌟',
     keyManagementUrl: 'https://dashscope.console.aliyun.com/apiKey',
+    baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
     color: 'from-orange-400 to-red-500',
     description: '通义千问等模型'
   },
@@ -112,6 +123,7 @@ const AI_SERVICES = [
     name: '腾讯混元',
     icon: '🚀',
     keyManagementUrl: 'https://console.cloud.tencent.com/hunyuan/apikey',
+    baseUrl: 'https://hunyuan.tencentcloudapi.com',
     color: 'from-blue-500 to-green-600',
     description: '混元大模型'
   },
@@ -120,6 +132,7 @@ const AI_SERVICES = [
     name: '腾讯云TI',
     icon: '💠',
     keyManagementUrl: 'https://console.cloud.tencent.com/ti/apikey',
+    baseUrl: 'https://ti.tencentcloudapi.com',
     color: 'from-cyan-500 to-blue-600',
     description: '腾讯云TI平台'
   },
@@ -128,6 +141,7 @@ const AI_SERVICES = [
     name: '智谱AI',
     icon: '🎯',
     keyManagementUrl: 'https://bigmodel.cn/usercenter/proj-mgmt/apikeys',
+    baseUrl: 'https://open.bigmodel.cn/api/paas/v4',
     color: 'from-red-500 to-pink-600',
     description: 'GLM系列模型'
   },
@@ -136,6 +150,7 @@ const AI_SERVICES = [
     name: '月之暗面',
     icon: '🌙',
     keyManagementUrl: 'https://platform.moonshot.cn/console/api-keys',
+    baseUrl: 'https://api.moonshot.cn/v1',
     color: 'from-purple-600 to-indigo-600',
     description: 'KIMI系列模型'
   },
@@ -144,6 +159,7 @@ const AI_SERVICES = [
     name: 'DeepSeek',
     icon: '🔬',
     keyManagementUrl: 'https://platform.deepseek.com/api_keys',
+    baseUrl: 'https://api.deepseek.com/v1',
     color: 'from-emerald-500 to-teal-600',
     description: '深度求索AI模型'
   },
@@ -152,6 +168,7 @@ const AI_SERVICES = [
     name: 'SiliconFlow',
     icon: '⚡',
     keyManagementUrl: 'https://cloud.siliconflow.cn/account/ak',
+    baseUrl: 'https://api.siliconflow.cn/v1',
     color: 'from-amber-500 to-orange-600',
     description: '硅基流动AI平台'
   },
@@ -160,6 +177,7 @@ const AI_SERVICES = [
     name: '火山方舟',
     icon: '🌋',
     keyManagementUrl: 'https://console.volcengine.com/ark/region:ark+cn-beijing/apikey',
+    baseUrl: 'https://ark.cn-beijing.volces.com/api/v3',
     color: 'from-red-600 to-orange-600',
     description: '字节跳动大模型平台'
   },
@@ -168,6 +186,7 @@ const AI_SERVICES = [
     name: '飞书',
     icon: '📱',
     keyManagementUrl: 'https://open.feishu.cn/app',
+    baseUrl: 'https://open.feishu.cn/open-apis',
     color: 'from-blue-500 to-indigo-500',
     description: '飞书开放平台'
   }
@@ -215,6 +234,7 @@ function App() {
       serviceName: service.name,
       serviceIcon: service.icon,
       serviceUrl: service.keyManagementUrl,
+      baseUrl: service.baseUrl,
       keyName: newKey.keyName || `${service.name} Key ${apiKeys.filter(k => k.serviceId === newKey.serviceId).length + 1}`,
       keyValue: newKey.keyValue,
       note: newKey.note,
@@ -254,7 +274,8 @@ function App() {
       密钥名称: key.keyName,
       密钥值: key.keyValue,
       备注: key.note,
-      添加时间: key.createdAt
+      添加时间: key.createdAt,
+      base_url: key.baseUrl || ''
     }))
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
@@ -273,13 +294,14 @@ function App() {
 
   // 导出密钥为 CSV
   const exportToCSV = () => {
-    const headers = ['服务名称', '密钥名称', '密钥值', '备注', '添加时间']
+    const headers = ['服务名称', '密钥名称', '密钥值', '备注', '添加时间', 'base_url']
     const rows = apiKeys.map(key => [
       key.serviceName,
       key.keyName,
       key.keyValue,
       key.note,
-      key.createdAt
+      key.createdAt,
+      key.baseUrl || ''
     ])
 
     const csvContent = [
