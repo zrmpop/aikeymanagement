@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Plus, Trash2, ExternalLink, Copy, CheckCircle2, XCircle, Search, Filter, ChevronDown, ChevronUp, Download } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Plus, Trash2, ExternalLink, Copy, CheckCircle2, XCircle, Search, Filter, ChevronDown, ChevronUp, Download, Upload } from 'lucide-react'
 
 // 示例密钥数据（仅用于演示，实际使用时请通过界面添加自己的密钥）
 const EXAMPLE_KEYS = [
@@ -189,6 +189,33 @@ const AI_SERVICES = [
     baseUrl: 'https://open.feishu.cn/open-apis',
     color: 'from-blue-500 to-indigo-500',
     description: '飞书开放平台'
+  },
+  {
+    id: 'minimax',
+    name: 'MiniMax',
+    icon: '🎬',
+    keyManagementUrl: 'https://api.minimax.chat/user-center/basic-information/interface-key',
+    baseUrl: 'https://api.minimax.chat/v1',
+    color: 'from-pink-500 to-rose-600',
+    description: 'MiniMax AI模型'
+  },
+  {
+    id: 'bocha',
+    name: 'Bocha',
+    icon: '🌐',
+    keyManagementUrl: 'https://bochaai.com',
+    baseUrl: 'https://api.bochaai.com/v1',
+    color: 'from-teal-500 to-cyan-600',
+    description: 'Bocha AI服务'
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    icon: '💎',
+    keyManagementUrl: 'https://console.cloud.google.com/apis/credentials',
+    baseUrl: 'https://generativelanguage.googleapis.com/v1beta',
+    color: 'from-purple-500 to-blue-600',
+    description: 'Google Gemini模型'
   }
 ]
 
@@ -214,6 +241,7 @@ function App() {
   const [filterService, setFilterService] = useState('all')
   const [expandedServices, setExpandedServices] = useState(new Set())
   const [viewMode, setViewMode] = useState('grid') // grid | list
+  const fileInputRef = useRef(null)
 
   // 保存到localStorage
   useEffect(() => {
@@ -323,6 +351,73 @@ function App() {
     setTimeout(() => setNotification(null), 3000)
   }
 
+  // 导入密钥从 JSON 文件
+  const handleImportFromJSON = (event) => {
+    const file = event.target.files[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target.result)
+        
+        if (!Array.isArray(importedData)) {
+          setNotification({ type: 'error', message: '文件格式错误：应为数组' })
+          setTimeout(() => setNotification(null), 3000)
+          return
+        }
+
+        let successCount = 0
+        let errorCount = 0
+        const newKeys = []
+
+        importedData.forEach(item => {
+          // 查找对应的服务
+          const service = AI_SERVICES.find(s => s.name === item.服务名称 || s.id === item.serviceId)
+          
+          if (!item.密钥值) {
+            errorCount++
+            return
+          }
+
+          const keyEntry = {
+            id: Date.now() + Math.random(),
+            serviceId: service ? service.id : 'unknown',
+            serviceName: service ? service.name : item.服务名称 || '未知服务',
+            serviceIcon: service ? service.icon : '🔑',
+            serviceUrl: service ? service.keyManagementUrl : '',
+            baseUrl: item.base_url || item.baseUrl || '',
+            keyName: item.密钥名称 || '导入的密钥',
+            keyValue: item.密钥值,
+            note: item.备注 || '',
+            createdAt: item.添加时间 || new Date().toLocaleDateString('zh-CN')
+          }
+
+          newKeys.push(keyEntry)
+          successCount++
+        })
+
+        setApiKeys([...apiKeys, ...newKeys])
+        setNotification({ 
+          type: 'success', 
+          message: `导入成功：${successCount} 个密钥${errorCount > 0 ? `，失败：${errorCount} 个` : ''}` 
+        })
+        setTimeout(() => setNotification(null), 3000)
+      } catch (error) {
+        setNotification({ type: 'error', message: '文件解析失败，请检查文件格式' })
+        setTimeout(() => setNotification(null), 3000)
+      }
+    }
+
+    reader.readAsText(file)
+    event.target.value = '' // 重置 input，允许重复导入同一文件
+  }
+
+  // 触发文件选择对话框
+  const triggerImport = () => {
+    fileInputRef.current?.click()
+  }
+
   const toggleServiceExpansion = (serviceId) => {
     const newExpanded = new Set(expandedServices)
     if (newExpanded.has(serviceId)) {
@@ -408,6 +503,20 @@ function App() {
                 <Download size={16} />
                 导出 CSV
               </button>
+              <button
+                onClick={triggerImport}
+                className="flex items-center gap-2 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 px-4 py-2 rounded-lg text-sm transition-all border border-amber-500/30"
+              >
+                <Upload size={16} />
+                导入密钥
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImportFromJSON}
+                accept=".json"
+                style={{ display: 'none' }}
+              />
             </div>
           </div>
         </div>
