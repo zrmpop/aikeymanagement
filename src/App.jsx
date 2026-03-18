@@ -216,6 +216,161 @@ const AI_SERVICES = [
     baseUrl: 'https://generativelanguage.googleapis.com/v1beta',
     color: 'from-purple-500 to-blue-600',
     description: 'Google Gemini模型'
+  },
+  // ── 国际平台 ──
+  {
+    id: 'mistral',
+    name: 'Mistral AI',
+    icon: '🌪️',
+    keyManagementUrl: 'https://console.mistral.ai/api-keys/',
+    baseUrl: 'https://api.mistral.ai/v1',
+    color: 'from-orange-500 to-amber-600',
+    description: 'Mistral 系列开源模型'
+  },
+  {
+    id: 'groq',
+    name: 'Groq',
+    icon: '⚡',
+    keyManagementUrl: 'https://console.groq.com/keys',
+    baseUrl: 'https://api.groq.com/openai/v1',
+    color: 'from-lime-500 to-green-600',
+    description: '超高速推理平台'
+  },
+  {
+    id: 'together',
+    name: 'Together AI',
+    icon: '🤝',
+    keyManagementUrl: 'https://api.together.xyz/settings/api-keys',
+    baseUrl: 'https://api.together.xyz/v1',
+    color: 'from-sky-500 to-blue-600',
+    description: '开源模型云端推理'
+  },
+  {
+    id: 'perplexity',
+    name: 'Perplexity AI',
+    icon: '🔎',
+    keyManagementUrl: 'https://www.perplexity.ai/settings/api',
+    baseUrl: 'https://api.perplexity.ai',
+    color: 'from-teal-500 to-cyan-600',
+    description: 'Sonar 搜索增强模型'
+  },
+  {
+    id: 'xai',
+    name: 'xAI (Grok)',
+    icon: '𝕏',
+    keyManagementUrl: 'https://console.x.ai/',
+    baseUrl: 'https://api.x.ai/v1',
+    color: 'from-slate-600 to-zinc-800',
+    description: 'Grok 系列模型'
+  },
+  {
+    id: 'openrouter',
+    name: 'OpenRouter',
+    icon: '🔀',
+    keyManagementUrl: 'https://openrouter.ai/keys',
+    baseUrl: 'https://openrouter.ai/api/v1',
+    color: 'from-violet-500 to-purple-700',
+    description: '统一路由多家模型'
+  },
+  {
+    id: 'fireworks',
+    name: 'Fireworks AI',
+    icon: '🎆',
+    keyManagementUrl: 'https://app.fireworks.ai/users/settings/access-tokens',
+    baseUrl: 'https://api.fireworks.ai/inference/v1',
+    color: 'from-red-500 to-orange-600',
+    description: '快速开源模型推理'
+  },
+  {
+    id: 'novita',
+    name: 'Novita AI',
+    icon: '🌸',
+    keyManagementUrl: 'https://novita.ai/settings#key-management',
+    baseUrl: 'https://api.novita.ai/v3/openai',
+    color: 'from-pink-400 to-rose-500',
+    description: '低价开源模型 API'
+  },
+  {
+    id: 'cerebras',
+    name: 'Cerebras',
+    icon: '🧩',
+    keyManagementUrl: 'https://cloud.cerebras.ai/platform/settings/api-keys',
+    baseUrl: 'https://api.cerebras.ai/v1',
+    color: 'from-blue-600 to-indigo-700',
+    description: 'Cerebras 超快推理'
+  },
+  // ── 国内平台 ──
+  {
+    id: 'iflytek',
+    name: '讯飞星火',
+    icon: '✨',
+    keyManagementUrl: 'https://console.xfyun.cn/services/cbm',
+    baseUrl: 'https://spark-api-open.xf-yun.com/v1',
+    color: 'from-blue-500 to-sky-600',
+    description: '讯飞星火大模型'
+  },
+  {
+    id: 'baichuan',
+    name: '百川AI',
+    icon: '🏔️',
+    keyManagementUrl: 'https://platform.baichuan-ai.com/console/apikey',
+    baseUrl: 'https://api.baichuan-ai.com/v1',
+    color: 'from-emerald-500 to-green-700',
+    description: '百川系列大模型'
+  },
+  {
+    id: '01ai',
+    name: '零一万物',
+    icon: '0️⃣',
+    keyManagementUrl: 'https://platform.lingyiwanwu.com/apikeys',
+    baseUrl: 'https://api.lingyiwanwu.com/v1',
+    color: 'from-gray-600 to-slate-700',
+    description: 'Yi 系列大模型'
+  },
+  {
+    id: 'stepfun',
+    name: '阶跃星辰',
+    icon: '🪐',
+    keyManagementUrl: 'https://platform.stepfun.com/interface-key',
+    baseUrl: 'https://api.stepfun.com/v1',
+    color: 'from-indigo-500 to-violet-600',
+    description: 'Step 系列大模型'
+  },
+  {
+    id: 'sensenova',
+    name: '商汤日日新',
+    icon: '🏢',
+    keyManagementUrl: 'https://console.sensecore.cn/iam',
+    baseUrl: 'https://api.sensenova.cn/v1/llm',
+    color: 'from-red-600 to-rose-700',
+    description: '商汤 SenseNova 模型'
+  },
+  {
+    id: 'hunyuan',
+    name: '混元大模型',
+    icon: '🌀',
+    keyManagementUrl: 'https://console.cloud.tencent.com/hunyuan/apikey',
+    baseUrl: 'https://api.hunyuan.cloud.tencent.com/v1',
+    color: 'from-cyan-500 to-blue-600',
+    description: '腾讯混元（OpenAI 兼容）'
+  },
+  {
+    id: 'doubao',
+    name: '豆包',
+    icon: '🫘',
+    keyManagementUrl: 'https://console.volcengine.com/ark/region:ark+cn-beijing/apikey',
+    baseUrl: 'https://ark.cn-beijing.volces.com/api/v3',
+    color: 'from-green-500 to-teal-600',
+    description: '字节豆包大模型'
+  },
+  {
+    id: 'cloudflare_ai',
+    name: 'Cloudflare AI',
+    icon: '☁️',
+    keyManagementUrl: 'https://dash.cloudflare.com/profile/api-tokens',
+    baseUrl: 'https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1',
+    color: 'from-orange-400 to-yellow-500',
+    description: 'Cloudflare Workers AI'
   }
 ]
 
