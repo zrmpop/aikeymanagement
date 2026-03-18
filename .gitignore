@@ -42,3 +42,6 @@ yarn-error.log*
 *.sln
 *.sw?
 aikeys_2026-03-12.json
+# 排除所有导出的密钥文件和测试文件
+aikeys_*.json
+test_import.json
