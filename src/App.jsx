@@ -255,6 +255,16 @@ function App() {
       return
     }
 
+    // 去重检查：相同的 keyValue 视为重复
+    const isDuplicate = apiKeys.some(k => k.keyValue === newKey.keyValue)
+    if (isDuplicate) {
+      setNotification({ type: 'error', message: '该密钥已存在，已自动跳过' })
+      setTimeout(() => setNotification(null), 3000)
+      setNewKey({ serviceId: '', keyName: '', keyValue: '', note: '' })
+      setShowAddModal(false)
+      return
+    }
+
     const service = AI_SERVICES.find(s => s.id === newKey.serviceId)
     const keyEntry = {
       id: Date.now(),
@@ -368,17 +378,28 @@ function App() {
         }
 
         let successCount = 0
+        let skipCount = 0
         let errorCount = 0
         const newKeys = []
 
+        // 已存在的 keyValue 集合，用于本批次内部去重
+        const existingKeyValues = new Set(apiKeys.map(k => k.keyValue))
+
         importedData.forEach(item => {
-          // 查找对应的服务
-          const service = AI_SERVICES.find(s => s.name === item.服务名称 || s.id === item.serviceId)
-          
           if (!item.密钥值) {
             errorCount++
             return
           }
+
+          // 去重：已存在（localStorage 或本批次内）则跳过
+          if (existingKeyValues.has(item.密钥值)) {
+            skipCount++
+            return
+          }
+          existingKeyValues.add(item.密钥值)
+
+          // 查找对应的服务
+          const service = AI_SERVICES.find(s => s.name === item.服务名称 || s.id === item.serviceId)
 
           const keyEntry = {
             id: Date.now() + Math.random(),
@@ -386,7 +407,7 @@ function App() {
             serviceName: service ? service.name : item.服务名称 || '未知服务',
             serviceIcon: service ? service.icon : '🔑',
             serviceUrl: service ? service.keyManagementUrl : '',
-            baseUrl: item.base_url || item.baseUrl || '',
+            baseUrl: item.base_url || item.baseUrl || (service ? service.baseUrl : ''),
             keyName: item.密钥名称 || '导入的密钥',
             keyValue: item.密钥值,
             note: item.备注 || '',
@@ -397,12 +418,14 @@ function App() {
           successCount++
         })
 
-        setApiKeys([...apiKeys, ...newKeys])
-        setNotification({ 
-          type: 'success', 
-          message: `导入成功：${successCount} 个密钥${errorCount > 0 ? `，失败：${errorCount} 个` : ''}` 
-        })
-        setTimeout(() => setNotification(null), 3000)
+        setApiKeys(prev => [...prev, ...newKeys])
+
+        const parts = []
+        if (successCount > 0) parts.push(`成功导入 ${successCount} 个`)
+        if (skipCount > 0) parts.push(`跳过重复 ${skipCount} 个`)
+        if (errorCount > 0) parts.push(`无效 ${errorCount} 个`)
+        setNotification({ type: successCount > 0 ? 'success' : 'error', message: parts.join('，') })
+        setTimeout(() => setNotification(null), 4000)
       } catch (error) {
         setNotification({ type: 'error', message: '文件解析失败，请检查文件格式' })
         setTimeout(() => setNotification(null), 3000)
