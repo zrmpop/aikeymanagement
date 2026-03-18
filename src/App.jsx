@@ -916,7 +916,7 @@ function App() {
           setShowAddModal(false)
           setNewKey({ serviceId: '', keyName: '', keyValue: '', note: '' })
         }}>
-          <div className="bg-slate-900 rounded-2xl max-w-lg w-full shadow-2xl border border-slate-700/50" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-slate-900 rounded-2xl max-w-xl w-full shadow-2xl border border-slate-700/50" onClick={(e) => e.stopPropagation()}>
             <div className="p-6 border-b border-slate-700/50 flex items-center justify-between">
               <h2 className="text-xl font-bold text-white">添加API密钥</h2>
               <button
@@ -948,6 +948,35 @@ function App() {
                     </option>
                   ))}
                 </select>
+
+                {/* 选中服务后显示跳转卡片 */}
+                {newKey.serviceId && (() => {
+                  const sel = AI_SERVICES.find(s => s.id === newKey.serviceId)
+                  if (!sel) return null
+                  return (
+                    <div className={`mt-3 rounded-xl p-4 bg-gradient-to-r ${sel.color} bg-opacity-10 border border-white/10`}>
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span className="text-2xl shrink-0">{sel.icon}</span>
+                          <div className="min-w-0">
+                            <p className="text-white font-semibold text-sm">{sel.name}</p>
+                            <p className="text-white/60 text-xs mt-0.5 truncate">{sel.description}</p>
+                            <p className="text-white/40 text-xs mt-0.5 truncate font-mono">{sel.baseUrl}</p>
+                          </div>
+                        </div>
+                        <a
+                          href={sel.keyManagementUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 flex items-center gap-1.5 bg-white text-slate-900 hover:bg-slate-100 px-3.5 py-2 rounded-lg text-xs font-bold transition-all shadow whitespace-nowrap"
+                        >
+                          <ExternalLink size={13} />
+                          去获取 Key
+                        </a>
+                      </div>
+                    </div>
+                  )
+                })()}
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2.5">
